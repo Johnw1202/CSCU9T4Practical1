@@ -16,7 +16,18 @@ public class TrainingRecord {
     
     // add a record to the list
    public void addEntry(Entry e){
-       tr.add(e);    
+       
+	   ListIterator<Entry> iter = tr.listIterator();
+       while (iter.hasNext()) {
+          Entry current = iter.next();
+          if (current.getDay()==e.getDay() && current.getMonth()==e.getMonth() && current.getYear()==e.getYear() && current.getName().equalsIgnoreCase(e.getName())) 
+          {
+        	  System.out.println("Cannot add duplicate entry");
+        	  return;
+          }
+            }
+	   
+	   tr.add(e);    
    } // addClass
    
    // look up the entry of a given day and month
@@ -30,6 +41,44 @@ public class TrainingRecord {
             }
        return result;
    } // lookupEntry
+   
+   
+   public String removeEntry (String n, int d, int m, int y) {
+       ListIterator<Entry> iter = tr.listIterator();
+       String result = "No entries found";
+       while (iter.hasNext()) {
+          Entry current = iter.next();
+          if (current.getDay()==d && current.getMonth()==m && current.getYear()==y && current.getName().equalsIgnoreCase(n)) 
+             
+          iter.remove();
+          result = "Entry removed";
+          
+            }
+       return result;
+   }
+   
+   public String lookUpAllEntry (int d, int m, int y) //lookup all matching entries
+   {
+	   String result = "";
+	   int resultCounter = 0;
+	   ListIterator<Entry> iter = tr.listIterator();
+	   
+	   while (iter.hasNext())
+	   {
+		   Entry current = iter.next();
+		   if (current.getDay() == d && current.getMonth() == m && current.getYear() == y)
+		   {
+			   result = result + current.getEntry();
+			   resultCounter++;
+		   }
+	   }
+	   if (resultCounter == 0)
+	   {
+		   result = "No entries found";
+	   }
+	   
+	   return result;
+   }
    
    // Count the number of entries
    public int getNumberOfEntries(){
