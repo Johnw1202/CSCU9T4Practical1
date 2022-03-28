@@ -49,7 +49,8 @@ public class Entry {
   } //getYear
 
   public String getEntry () {
-   String result = getName()+" ran " + getDistance() + " km in "
+  
+	  String result = getName()+" covered " + getDistance() + " km in "
              +getHour()+":"+getMin()+":"+ getSec() + " on "
              +getDay()+"/"+getMonth()+"/"+getYear()+"\n";
    return result;
